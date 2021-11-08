@@ -1,6 +1,19 @@
 variable "ENV" {
   type = string
   description = "The prefix which should be used for all resources in this environment. Make it unique, like ksultanau."
+  default = "tislenko"
+}
+
+variable "STORAGE_ACCOUNT_CONTAINER_NAME" {
+  type = string
+  description = "The name of the container that belongs to storage account."
+  default = "data-sparksql"
+}
+
+variable "STORAGE_ACCOUNT_CONTAINER_NAME_RESULT" {
+  type = string
+  description = "The name of the container that belongs to storage account and stores the result of homework."
+  default = "data"
 }
 
 variable "LOCATION" {

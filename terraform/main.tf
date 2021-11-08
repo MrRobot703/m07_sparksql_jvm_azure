@@ -1,6 +1,10 @@
 # Setup azurerm as a state backend
 terraform {
   backend "azurerm" {
+    resource_group_name = "resourceGroup1"
+    storage_account_name = "terraformstate420"
+    container_name       = "terraform-state-container-sparksql"
+    key                  = "sparksql.terraform.tfstate"
   }
 }
 
@@ -14,10 +18,6 @@ data "azurerm_client_config" "current" {}
 resource "azurerm_resource_group" "bdcc" {
   name = "rg-${var.ENV}-${var.LOCATION}"
   location = var.LOCATION
-
-  lifecycle {
-    prevent_destroy = true
-  }
 
   tags = {
     region = var.BDCC_REGION
@@ -41,10 +41,6 @@ resource "azurerm_storage_account" "bdcc" {
     ip_rules = values(var.IP_RULES)
   }
 
-  lifecycle {
-    prevent_destroy = true
-  }
-
   tags = {
     region = var.BDCC_REGION
     env = var.ENV
@@ -55,12 +51,16 @@ resource "azurerm_storage_data_lake_gen2_filesystem" "gen2_data" {
   depends_on = [
     azurerm_storage_account.bdcc]
 
-  name = "data"
+  name = var.STORAGE_ACCOUNT_CONTAINER_NAME
   storage_account_id = azurerm_storage_account.bdcc.id
+}
 
-  lifecycle {
-    prevent_destroy = true
-  }
+resource "azurerm_storage_data_lake_gen2_filesystem" "gen2_data_result" {
+  depends_on = [
+    azurerm_storage_account.bdcc]
+
+  name = var.STORAGE_ACCOUNT_CONTAINER_NAME_RESULT
+  storage_account_id = azurerm_storage_account.bdcc.id
 }
 
 resource "azurerm_databricks_workspace" "bdcc" {
