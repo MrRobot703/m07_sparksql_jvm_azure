@@ -48,3 +48,5 @@ For more detailed guid please refer to [databricks docs](https://docs.databricks
 First run the java Driver class to copy files from external azure blob storage into internal one.
 Then go into databricks notebook and upload sparksql_jvm_azure.dbc from notebooks folder.
 
+To use databricks key vault for storing secrets there is a brilliant [video](https://www.youtube.com/watch?v=HZ00AznWvKc&list=PLEuWSnkVcdnatmaUOicGa3UJPUTR4bvKc&index=2&t=59s) 
+on youtube that perfectly explains how to get started. Unfortunately this feature is only available for premium subscriptions.
