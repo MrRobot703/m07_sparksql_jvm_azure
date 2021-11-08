@@ -1,6 +1,6 @@
 # Spark Databricks SQL
 
-This a simple databricks SQL application and is available on . First there are some necessary components that
+This a simple databricks SQL application and is available on https://github.com/MrRobot703/m07_sparksql_jvm_azure. First there are some necessary components that
 need to be installed and provisioned:
 
 * Azure account
